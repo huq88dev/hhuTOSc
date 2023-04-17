@@ -24,6 +24,8 @@ void aufgabe01() {
 }
 
 int main() {
+    unsigned int *ptr = (unsigned int *)0xb8000;
+    *ptr = -1;
     /* Hier muess Code eingefuegt werden */
 
     // Bildschirm loeschen.
