@@ -1,4 +1,8 @@
 *.o
+*.d
+src/build/system*
+system.bin
+grub.cfg
 
 # Created by https://www.toptal.com/developers/gitignore/api/clion+iml,clion+all,clion
 # Edit at https://www.toptal.com/developers/gitignore?templates=clion+iml,clion+all,clion
