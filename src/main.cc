@@ -24,15 +24,14 @@ void aufgabe01() {
 }
 
 int main() {
-    unsigned int *ptr = (unsigned int *)0xb8000;
-    *ptr = -1;
     /* Hier muess Code eingefuegt werden */
 
     // Bildschirm loeschen.
+    kout.clear();
     
     // Startmeldung ausgeben
 
-    aufgabe01();
+    //aufgabe01();
 
     while (1);
     return 0;

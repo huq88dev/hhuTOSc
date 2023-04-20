@@ -52,9 +52,10 @@ void CGA::getpos (int &x, int &y) {
  *      attrib      Attributbyte fuer das Zeichen                            *
  *****************************************************************************/
 void CGA::show (int x, int y, char character, unsigned char attrib) {
-    
-    /* Hier muess Code eingefuegt werden */
-    
+    char *pos;
+    pos = const_cast<char *>(CGA_START) + 2*(x + y*80);
+    *pos = character;
+    *(pos + 1) = attrib;
 }
 
 
@@ -70,8 +71,9 @@ void CGA::show (int x, int y, char character, unsigned char attrib) {
  *      attrib      Attributbyte fuer alle Zeichen der Zeichenkette          *
  *****************************************************************************/
 void CGA::print (char* string, int n, unsigned char attrib) {
-    
-    /* Hier muess Code eingefuegt werden */
+
+    for (int i = 0; i < n; ++i) {
+    }
     
 }
 
@@ -96,9 +98,11 @@ void CGA::scrollup () {
  * Beschreibung:    Lösche den Textbildschirm.                               *
  *****************************************************************************/
 void CGA::clear () {
-    
-    /* Hier muess Code eingefuegt werden */
-    
+    for (int x = 0; x < COLUMNS; ++x) {
+        for (int y = 0; y < ROWS; ++y) {
+            show(x, y, ' ', BLACK);
+        }
+    }
 }
 
 
