@@ -88,7 +88,7 @@ void CGA::print (char* string, int n, unsigned char attrib) {
             x++;
         }
     }
-    
+    setpos(x, y);
 }
 
 
