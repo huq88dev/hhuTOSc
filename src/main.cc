@@ -30,6 +30,7 @@ int main() {
     kout.clear();
     
     // Startmeldung ausgeben
+    kout << "Hello!\nTest" << endl;
 
     //aufgabe01();
 

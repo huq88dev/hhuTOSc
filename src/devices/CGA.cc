@@ -20,9 +20,11 @@
  * Beschreibung:    Setzen des Cursors in Spalte x und Zeile y.              *
  *****************************************************************************/
 void CGA::setpos (int x, int y) {
-
-    /* Hier muess Code eingefuegt werden */
-
+    unsigned short total_pos = y * COLUMNS + x;
+    index_port.outb(14);
+    data_port.outb(total_pos >> 8);
+    index_port.outb(15);
+    data_port.outb(total_pos & 0xff);
 }
 
 
@@ -34,9 +36,13 @@ void CGA::setpos (int x, int y) {
  * Rückgabewerte:   x und y                                                  *
  *****************************************************************************/
 void CGA::getpos (int &x, int &y) {
-    
-    /* Hier muess Code eingefuegt werden */
-    
+    index_port.outb(14);
+    unsigned short high = data_port.inb();
+    index_port.outb(15);
+    unsigned short low = data_port.inb();
+    unsigned short total_pos = (high << 8) | low;
+    x = total_pos % COLUMNS;
+    y = (int) total_pos / COLUMNS;
 }
 
 
@@ -71,8 +77,16 @@ void CGA::show (int x, int y, char character, unsigned char attrib) {
  *      attrib      Attributbyte fuer alle Zeichen der Zeichenkette          *
  *****************************************************************************/
 void CGA::print (char* string, int n, unsigned char attrib) {
-
+    int x, y;
+    getpos(x, y);
     for (int i = 0; i < n; ++i) {
+        if(x == 80 || *(string + i) == '\n') {
+            x = 0;
+            y++;
+        } else {
+            show(x, y, *(string + i), attrib);
+            x++;
+        }
     }
     
 }
