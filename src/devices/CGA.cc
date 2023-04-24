@@ -134,7 +134,10 @@ void CGA::clear () {
  *      blink       ywa/no                                                   *
  *****************************************************************************/
 unsigned char CGA::attribute (CGA::color bg, CGA::color fg, bool blink) {
-    
-    /* Hier muess Code eingefuegt werden */
-    
+    unsigned char att = 0;
+    if(blink) {
+        att |= 1 << 7;
+    }
+    att |= (bg << 4 | fg);
+    return att;
 }

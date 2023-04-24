@@ -21,4 +21,10 @@ void text_demo() {
     for(int i = 0; i <= 16; i++) {
         kout << " | " << dec << i << " | " << hex << i << " | " << bin << i << " | " << endl;
     }
+
+    kout << "\nTeste Attributfunktion: " << endl;
+    unsigned char attr = kout.attribute(CGA::color::GREEN, CGA::color::MAGENTA, false);
+    kout.print("Kein Blinken\n", 13, attr);
+    attr = kout.attribute(CGA::color::GREEN, CGA::color::MAGENTA, true);
+    kout.print("Fake Blinken\n", 13, attr);
 }
