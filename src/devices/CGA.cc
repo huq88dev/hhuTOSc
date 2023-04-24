@@ -117,6 +117,7 @@ void CGA::clear () {
             show(x, y, ' ', BLACK);
         }
     }
+    setpos(0, 0);
 }
 
 
