@@ -24,15 +24,13 @@ void aufgabe01() {
 }
 
 int main() {
-    /* Hier muess Code eingefuegt werden */
-
     // Bildschirm loeschen.
     kout.clear();
     
     // Startmeldung ausgeben
-    kout << "Hello!\nTest" << endl;
+    kout << "Starting..." << endl;
 
-    //aufgabe01();
+    aufgabe01();
 
     while (1);
     return 0;

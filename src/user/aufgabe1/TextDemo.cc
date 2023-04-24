@@ -12,7 +12,13 @@
 
 
 void text_demo() {
-   
-   /* Hier muss Code eingefuegt werden */
 
+    // Bildschirm loeschen.
+    kout.clear();
+
+    // Startmeldung ausgeben
+    kout << "Test der Zahlenausgabefunktion:" << endl << endl << " | dec | hex | bin   |" << endl << " ---------------------" << endl;
+    for(int i = 0; i <= 16; i++) {
+        kout << " | " << dec << i << " | " << hex << i << " | " << bin << i << " | " << endl;
+    }
 }
