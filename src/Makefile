@@ -135,7 +135,7 @@ qemu: $(OBJDIR)/system.iso
 # auf, sodass es per GDB inspiziert werden kann.
 
 qemu-gdb: $(OBJDIR)/system.iso
-	$(VERBOSE) echo "break startup" > /tmp/gdbcommands.$(shell id -u)
+	$(VERBOSE) echo "break main" > /tmp/gdbcommands.$(shell id -u)
 	$(VERBOSE) echo "target remote 127.0.0.1:1234" >> /tmp/gdbcommands.$(shell id -u)
 	$(VERBOSE) echo "continue" >> /tmp/gdbcommands.$(shell id -u)
 	qemu-system-x86_64 -cdrom $(OBJDIR)/system.iso -k en-us -s -S -soundhw pcspk -vga std 
