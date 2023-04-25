@@ -271,9 +271,22 @@ Keyboard::Keyboard () :
  *****************************************************************************/
 Key Keyboard::key_hit () {
     Key invalid;  // nicht explizit initialisierte Tasten sind ungueltig
-         
-    /* Hier muss Code eingefuegt werden. */
 
+    bool outb_set = false;
+    unsigned char status;
+    while(!outb_set) {
+        status = ctrl_port.inb();
+        outb_set = status & outb;
+    }
+    code = data_port.inb();
+    bool auxb_set = status & auxb;
+    if(auxb_set) {
+        return invalid;
+    }
+    bool decoded = key_decoded();
+    if(decoded) {
+        return gather;
+    }
     return invalid;
 }
 
