@@ -111,6 +111,7 @@ void CGA::scrollup () {
     for(int x = 0; x < COLUMNS; x++) {
         show(x, ROWS-1, ' ', BLACK);
     }
+    setpos(0, ROWS-1);
 }
 
 
