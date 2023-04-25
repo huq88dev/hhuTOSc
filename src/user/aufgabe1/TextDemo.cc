@@ -24,7 +24,7 @@ void text_demo() {
 
     kout << "\nTeste Attributfunktion: " << endl;
     unsigned char attr = kout.attribute(CGA::color::GREEN, CGA::color::MAGENTA, false);
-    kout.print("Kein Blinken\n", 13, attr);
+    kout.print("Kein Blinken ", 13, attr);
     attr = kout.attribute(CGA::color::GREEN, CGA::color::MAGENTA, true);
     kout.print("Fake Blinken\n", 13, attr);
 }
