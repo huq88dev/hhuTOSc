@@ -10,7 +10,6 @@
 
 #include "kernel/Globals.h"
 
-
 void text_demo() {
 
     // Bildschirm loeschen.
@@ -19,7 +18,38 @@ void text_demo() {
     // Startmeldung ausgeben
     kout << "Test der Zahlenausgabefunktion:" << endl << endl << " | dec | hex | bin   |" << endl << " ---------------------" << endl;
     for(int i = 0; i <= 16; i++) {
-        kout << " | " << dec << i << " | " << hex << i << " | " << bin << i << " | " << endl;
+        kout << " | " << dec << i;
+
+        //richtige Anzahl der Leerzeichen bei Dezimalzahlen
+        if(i<10){
+            kout << " ";
+        }
+        
+        kout << "  | " << hex << i;
+        
+        //Richtige anzahl der Leerzeichen bei Hexzahlen
+        if(i<16){
+            kout << " ";
+        }
+        
+        kout << "| " << bin << i;
+        
+        //Richtige anzahl der Leerzeichen bei Binärzahlen
+        if(i<2){
+            kout << " ";
+        }
+        if(i<4){
+            kout << " ";
+        }
+        if(i<8){
+            kout << " ";
+        }
+        if(i<16){
+            kout << " ";
+        }
+        
+        kout << " | " << endl;
+        
     }
 
     kout << "\nTeste Attributfunktion: " << endl;
