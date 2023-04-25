@@ -13,6 +13,10 @@
 
 void keyboard_demo() {
 
-    /* Hier muess Code eingefuegt werden */
+    while(1) {
+        Key input = kb.key_hit();
+        kout << input.ascii();
+        kout.flush();
+    }
 
 }
