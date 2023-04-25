@@ -59,7 +59,7 @@ void CGA::getpos (int &x, int &y) {
  *****************************************************************************/
 void CGA::show (int x, int y, char character, unsigned char attrib) {
     char *pos;
-    pos = const_cast<char *>(CGA_START) + 2*(x + y*80);
+    pos = const_cast<char *>(CGA_START) + 2*(x + y*COLUMNS);
     *pos = character;
     *(pos + 1) = attrib;
 }
@@ -80,7 +80,7 @@ void CGA::print (char* string, int n, unsigned char attrib) {
     int x, y;
     getpos(x, y);
     for (int i = 0; i < n; ++i) {
-        if(x == 80 || *(string + i) == '\n') {
+        if(x == COLUMNS || *(string + i) == '\n') {
             x = 0;
             y++;
         } else {
@@ -100,9 +100,17 @@ void CGA::print (char* string, int n, unsigned char attrib) {
  *                  gefuellt.                                                *
  *****************************************************************************/
 void CGA::scrollup () {
-    
-    /* Hier muess Code eingefuegt werden */
-    
+    char *send, *recv;
+    for(int y = 0; y < ROWS-1; y++) {
+        for(int x = 0; x < (COLUMNS*2); x++) {
+            send = const_cast<char *>(CGA_START) + x + (y+1) * (COLUMNS*2);
+            recv = const_cast<char *>(CGA_START) + x + y * (COLUMNS*2);
+            *recv = *send;
+        }
+    }
+    for(int x = 0; x < COLUMNS; x++) {
+        show(x, ROWS-1, ' ', BLACK);
+    }
 }
 
 
