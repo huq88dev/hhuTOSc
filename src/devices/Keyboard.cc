@@ -274,10 +274,10 @@ Key Keyboard::key_hit () {
 
     bool outb_set = false;
     unsigned char status;
-    while(!outb_set) {
+    do {
         status = ctrl_port.inb();
         outb_set = status & outb;
-    }
+    } while(!outb_set);
     code = data_port.inb();
     bool auxb_set = status & auxb;
     if(auxb_set) {
