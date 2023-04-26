@@ -19,7 +19,7 @@
  * Beschreibung:    BumpAllokartor intitialisieren.                          *
  *****************************************************************************/
 void BumpAllocator::init() {
-
+    initialized = true;
      next = reinterpret_cast<unsigned char *>(Allocator::heap_start);
      // TODO: Fragen, was die Variable allocations machen soll.
 
@@ -32,6 +32,9 @@ void BumpAllocator::init() {
  * Beschreibung:    Ausgabe der Freispeicherinfos. Zu Debuggingzwecken.      *
  *****************************************************************************/
 void BumpAllocator::dump_free_memory() {
+    if(!initialized) {
+        init();
+    }
     uint64_t free_memory = reinterpret_cast<unsigned char *>(Allocator::heap_end) - next;
     kout << "Free Memory in BumpAllocator: " << free_memory << " Byte." << endl;
 }
@@ -43,6 +46,9 @@ void BumpAllocator::dump_free_memory() {
  * Beschreibung:    Einen neuen Speicherblock allozieren.                    * 
  *****************************************************************************/
 void * BumpAllocator::alloc(uint64_t req_size) {
+    if(!initialized) {
+        init();
+    }
     uint64_t free_memory = reinterpret_cast<unsigned char *>(Allocator::heap_end) - next;
     if(req_size > free_memory) {
         kout << "ERROR: Tried to allocate " << req_size << " byte, but only have " << free_memory << " byte of memory left." << endl;
@@ -60,6 +66,9 @@ void * BumpAllocator::alloc(uint64_t req_size) {
  * Beschreibung:    Nicht implementiert.                                     *
  *****************************************************************************/
 void BumpAllocator::free(void *ptr) {
+    if(!initialized) {
+        init();
+    }
     kout << "   mm_free: ptr= " << hex << (uint64_t)ptr << ", not supported" << endl;
 }
 
