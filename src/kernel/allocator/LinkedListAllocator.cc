@@ -45,6 +45,7 @@ void LinkedListAllocator::dump_free_memory() {
     free_block current = *free_start;
     while(nullptr != current.next) {
         kout << "| " << current.size << " Byte | -> ";
+        current = *current.next;
     }
     kout << "| " << current.size << " Byte |" << endl;
 }
