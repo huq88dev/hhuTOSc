@@ -11,7 +11,7 @@
 #include "kernel/Globals.h"
 #include "kernel/Allocator.h"
 #include "user/aufgabe2/HeapDemo.h"
-#include "user/aufgabe2/MyObj.h"
+//#include "user/aufgabe2/MyObj.h"
 
 
 // Hilfsfunktion: Auf Return-Taste warten
