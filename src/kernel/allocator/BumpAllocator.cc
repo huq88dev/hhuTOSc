@@ -20,7 +20,8 @@
  *****************************************************************************/
 void BumpAllocator::init() {
 
-     /* Hier muess Code eingefuegt werden */
+     next = reinterpret_cast<unsigned char *>(Allocator::heap_start);
+     // TODO: Fragen, was die Variable allocations machen soll.
 
 }
 
