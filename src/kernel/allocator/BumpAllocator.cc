@@ -43,9 +43,14 @@ void BumpAllocator::dump_free_memory() {
  * Beschreibung:    Einen neuen Speicherblock allozieren.                    * 
  *****************************************************************************/
 void * BumpAllocator::alloc(uint64_t req_size) {
-
-     /* Hier muess Code eingefuegt werden */
-
+    uint64_t free_memory = reinterpret_cast<unsigned char *>(Allocator::heap_end) - next;
+    if(req_size > free_memory) {
+        kout << "ERROR: Tried to allocate " << req_size << " byte, but only have " << free_memory << " byte of memory left." << endl;
+        return nullptr;
+    }
+    void *mem = next;
+    next += req_size;
+    return mem;
 }
 
 
