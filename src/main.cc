@@ -13,6 +13,7 @@
 #include "kernel/Globals.h"
 #include "user/aufgabe1/TextDemo.h"
 #include "user/aufgabe1/KeyboardDemo.h"
+#include "user/aufgabe2/HeapDemo.h"
 
 
 void aufgabe01() { 
@@ -24,13 +25,17 @@ void aufgabe01() {
 }
 
 int main() {
+    //Initialisiere Heap
+    allocator.init();
+
     // Bildschirm loeschen.
     kout.clear();
     
     // Startmeldung ausgeben
     kout << "Starting..." << endl;
+    heap_demo();
 
-    aufgabe01();
+    //aufgabe01();
 
     while (1);
     return 0;
