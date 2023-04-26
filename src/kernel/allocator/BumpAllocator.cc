@@ -11,6 +11,7 @@
 
 #include "kernel/Globals.h"
 #include "kernel/allocator/LinkedListAllocator.h"
+#include "BumpAllocator.h"
 
 
 /*****************************************************************************
@@ -19,7 +20,7 @@
  * Beschreibung:    BumpAllokartor intitialisieren.                          *
  *****************************************************************************/
 void BumpAllocator::init() {
-    initialized = true;
+     initialized = true;
      next = reinterpret_cast<unsigned char *>(Allocator::heap_start);
      // TODO: Fragen, was die Variable allocations machen soll.
 
