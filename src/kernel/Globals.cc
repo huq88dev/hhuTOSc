@@ -10,10 +10,11 @@
 
 #include "kernel/Globals.h"
 
-CPU             cpu;        
+CPU             cpu;
 PCSPK           pcspk;      // PC-Lautsprecher
 CGA_Stream      kout;       // Ausgabe-Strom fuer Kernel
 uint64_t        total_mem;  // RAM total
-//BumpAllocator         allocator;       
-LinkedListAllocator   allocator;       
+//BumpAllocator         allocator;
+LinkedListAllocator   allocator;
+Keyboard        kb;         // Tastatur
 

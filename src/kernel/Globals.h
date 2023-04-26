@@ -15,12 +15,14 @@
 #include "devices/CGA_Stream.h"
 #include "kernel/allocator/BumpAllocator.h"
 #include "kernel/allocator/LinkedListAllocator.h"
+#include "devices/Keyboard.h"
 
-extern CPU              cpu;        
-extern PCSPK            pcspk;      // PC-Lautsprecher
+extern CPU              cpu;        // CPU-spezifische Funktionen
 extern CGA_Stream       kout;       // Ausgabe-Strom fuer Kernel
+extern Keyboard         kb;
+extern PCSPK            pcspk;      // PC-Lautsprecher
 extern uint64_t         total_mem;  // RAM total
-//extern BumpAllocator    allocator;       
-extern LinkedListAllocator   allocator;       
+//extern BumpAllocator    allocator;
+extern LinkedListAllocator   allocator;
 
 #endif
