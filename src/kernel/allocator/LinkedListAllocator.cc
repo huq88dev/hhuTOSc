@@ -26,9 +26,12 @@
  *                  Speicherverwaltung erstmalig gerufen wird.               *
  *****************************************************************************/
 void LinkedListAllocator::init() {
+    initialized = true;
 
-     /* Hier muess Code eingefuegt werden */
-
+    free_start = reinterpret_cast<free_block *>(Allocator::heap_start);
+    *free_start = free_block();
+    free_start->size = Allocator::heap_size - HEAP_MIN_FREE_BLOCK_SIZE;
+    free_start->next = nullptr;
 }
 
 
@@ -38,9 +41,12 @@ void LinkedListAllocator::init() {
  * Beschreibung:    Ausgabe der Freispeicherliste. Zu Debuggingzwecken.      *
  *****************************************************************************/
 void LinkedListAllocator::dump_free_memory() {
-
-     /* Hier muess Code eingefuegt werden */
-
+    kout << "Free memory list: ";
+    free_block current = *free_start;
+    while(nullptr != current.next) {
+        kout << "| " << current.size << " Byte | -> ";
+    }
+    kout << "| " << current.size << " Byte |" << endl;
 }
 
 
