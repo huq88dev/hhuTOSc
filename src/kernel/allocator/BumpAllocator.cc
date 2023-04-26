@@ -32,9 +32,8 @@ void BumpAllocator::init() {
  * Beschreibung:    Ausgabe der Freispeicherinfos. Zu Debuggingzwecken.      *
  *****************************************************************************/
 void BumpAllocator::dump_free_memory() {
-    
-     /* Hier muess Code eingefuegt werden */
-
+    uint64_t free_memory = reinterpret_cast<unsigned char *>(Allocator::heap_end) - next;
+    kout << "Free Memory in BumpAllocator: " << free_memory << " Byte." << endl;
 }
 
 
