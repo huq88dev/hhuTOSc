@@ -41,13 +41,13 @@ void LinkedListAllocator::init() {
  * Beschreibung:    Ausgabe der Freispeicherliste. Zu Debuggingzwecken.      *
  *****************************************************************************/
 void LinkedListAllocator::dump_free_memory() {
-    kout << "Free memory list: ";
-    free_block current = *free_start;
-    while(nullptr != current.next) {
-        kout << "| " << current.size << " Byte | -> ";
-        current = *current.next;
+    kout << "Free memory list: " << free_start << " -> ";
+    free_block *current = free_start;
+    while(nullptr != current->next) {
+        kout << hex << current->next << ": " << current->size << " Byte -> ";
+        current = current->next;
     }
-    kout << "| " << current.size << " Byte |" << endl;
+    kout  << current << ": " << current->size << " Byte" << endl;
 }
 
 
