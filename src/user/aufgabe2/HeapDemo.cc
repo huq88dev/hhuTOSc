@@ -24,9 +24,16 @@ void waitForReturn() {
 
 void heap_demo() {
     allocator.dump_free_memory();
-    allocator.alloc(150);
+    void *mem = allocator.alloc(150);
+    kout << "Allocated 150 Byte at " << mem << endl;
     allocator.dump_free_memory();
-    allocator.alloc(50);
+    mem = allocator.alloc(50);
+    kout << "Allocated 50 Byte at " << mem << endl;
+    allocator.dump_free_memory();
+    mem = allocator.alloc(2096870);
+    if(mem == nullptr) {
+        kout << "Couldn't allocate 2096870 Byte. Not enough space for metadata." << endl;
+    }
     allocator.dump_free_memory();
     /*
     allocator.alloc(1500000);
