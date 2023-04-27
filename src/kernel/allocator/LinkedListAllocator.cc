@@ -30,8 +30,12 @@ void LinkedListAllocator::init() {
 
     free_start = reinterpret_cast<free_block *>(Allocator::heap_start);
     *free_start = free_block();
-    free_start->size = Allocator::heap_size - HEAP_MIN_FREE_BLOCK_SIZE;
-    free_start->next = nullptr;
+    free_start->size = 0;
+    free_block *first = free_start + HEAP_MIN_FREE_BLOCK_SIZE;
+    *first = free_block();
+    first->size = Allocator::heap_size - 2 * HEAP_MIN_FREE_BLOCK_SIZE;
+    first->next = nullptr;
+    free_start->next = first;
 }
 
 
@@ -41,10 +45,13 @@ void LinkedListAllocator::init() {
  * Beschreibung:    Ausgabe der Freispeicherliste. Zu Debuggingzwecken.      *
  *****************************************************************************/
 void LinkedListAllocator::dump_free_memory() {
-    kout << "Free memory list: " << free_start << " -> ";
+    if(!initialized) {
+        init();
+    }
+    kout << "Free memory list: ";
     free_block *current = free_start;
     while(nullptr != current->next) {
-        kout << hex << current->next << ": " << current->size << " Byte -> ";
+        kout << current << ": " << current->size << " Byte -> ";
         current = current->next;
     }
     kout  << current << ": " << current->size << " Byte" << endl;
@@ -57,9 +64,38 @@ void LinkedListAllocator::dump_free_memory() {
  * Beschreibung:    Einen neuen Speicherblock allozieren.                    * 
  *****************************************************************************/
 void * LinkedListAllocator::alloc(uint64_t req_size) {
-
-     /* Hier muess Code eingefuegt werden */
-
+    if(!initialized) {
+        init();
+    }
+    if (req_size > (UINT64_MAX - 8)) { // `req_size + 8` would overflow
+        return nullptr;
+    }
+    uint64_t needed_size = req_size + 8;
+    free_block *current = free_start->next;
+    free_block *before = free_start;
+    while(nullptr != current && current->size + HEAP_MIN_FREE_BLOCK_SIZE < needed_size) {
+        before = current;
+        current = current->next;
+    }
+    if(nullptr == current) {
+        return nullptr;
+    }
+    uint64_t final_size = 0;
+    void *mem = current + 8;
+    if((uint64_t) current->size < needed_size) {
+        final_size = current->size + HEAP_MIN_FREE_BLOCK_SIZE - 8;
+        before->next = current->next;
+    } else {
+        final_size = req_size;
+        free_block *new_block = current + needed_size;
+        *new_block = free_block();
+        new_block->size = current->size - needed_size;
+        new_block->next = current->next;
+        before->next = new_block;
+    }
+    uint64_t *size = reinterpret_cast<uint64_t *>(current);
+    *size = final_size;
+    return mem;
 }
 
 

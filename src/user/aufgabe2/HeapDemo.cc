@@ -24,9 +24,11 @@ void waitForReturn() {
 
 void heap_demo() {
     allocator.dump_free_memory();
-    /*
-    allocator.alloc(1500000);
+    allocator.alloc(150);
     allocator.dump_free_memory();
+    allocator.alloc(50);
+    allocator.dump_free_memory();
+    /*
     allocator.alloc(1500000);
     allocator.alloc(597152);
     allocator.dump_free_memory();
