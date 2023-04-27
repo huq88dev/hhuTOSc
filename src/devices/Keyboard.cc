@@ -246,7 +246,7 @@ Keyboard::Keyboard () :
    set_led (led::num_lock, false);
 
    // maximale Geschwindigkeit, minimale Verzoegerung
-   set_repeat_rate (0, 0);  
+   set_repeat_rate (0, 0);
 }
 
 
@@ -271,9 +271,22 @@ Keyboard::Keyboard () :
  *****************************************************************************/
 Key Keyboard::key_hit () {
     Key invalid;  // nicht explizit initialisierte Tasten sind ungueltig
-         
-    /* Hier muss Code eingefuegt werden. */
 
+    bool outb_set = false;
+    unsigned char status;
+    do {
+        status = ctrl_port.inb();
+        outb_set = status & outb;
+    } while(!outb_set);
+    code = data_port.inb();
+    bool auxb_set = status & auxb;
+    if(auxb_set) {
+        return invalid;
+    }
+    bool decoded = key_decoded();
+    if(decoded) {
+        return gather;
+    }
     return invalid;
 }
 
@@ -313,8 +326,19 @@ void Keyboard::reboot () {
  *****************************************************************************/
 void Keyboard::set_repeat_rate (int speed, int delay) {
 
-    /* Hier muss Code eingefuegt werden. */
-
+    unsigned char ctrl = ctrl_port.inb();
+    if(ctrl || speed < 0 || speed > 31 || delay < 0 || delay > 3) {
+        return;
+    }
+    data_port.outb(kbd_cmd::set_speed);
+    unsigned char reply;
+    do {
+        reply = data_port.inb();
+    } while(reply != kbd_reply::ack);
+    data_port.outb(delay << 4 | speed);
+    do {
+        reply = data_port.inb();
+    } while(reply != kbd_reply::ack);
 }
 
 

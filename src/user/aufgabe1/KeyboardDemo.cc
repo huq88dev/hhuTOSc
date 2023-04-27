@@ -12,7 +12,18 @@
 
 
 void keyboard_demo() {
-
-    /* Hier muess Code eingefuegt werden */
+    int x, y;
+    while(1) {
+        kout.getpos(x, y);
+        while(y >= kout.ROWS || x >= kout.COLUMNS) {
+            kout.scrollup();
+            kout.getpos(x, y);
+        }
+        Key input = kb.key_hit();
+        if(input != NULL) {
+            kout << input.ascii();
+            kout.flush();
+        }
+    }
 
 }
