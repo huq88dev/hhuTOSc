@@ -71,6 +71,10 @@ void * LinkedListAllocator::alloc(uint64_t req_size) {
         return nullptr;
     }
     uint64_t needed_size = req_size + 8;
+    if(needed_size < HEAP_MIN_FREE_BLOCK_SIZE) {
+        needed_size = HEAP_MIN_FREE_BLOCK_SIZE;
+        req_size = HEAP_MIN_FREE_BLOCK_SIZE - 8;
+    }
     free_block *current = free_start->next;
     free_block *before = free_start;
     while(nullptr != current && current->size < needed_size) {
@@ -81,7 +85,7 @@ void * LinkedListAllocator::alloc(uint64_t req_size) {
         return nullptr;
     }
     uint64_t final_size = req_size;
-    void *mem = current + 8;
+    void *mem = (char *)(current) + 8;
     if((uint64_t) current->size - needed_size < HEAP_MIN_FREE_BLOCK_SIZE) {
         final_size = current->size - 8;
         before->next = current->next;
