@@ -30,7 +30,7 @@ void LinkedListAllocator::init() {
 
     free_start = reinterpret_cast<free_block *>(Allocator::heap_start);
     *free_start = free_block();
-    free_start->size = HEAP_MIN_FREE_BLOCK_SIZE;
+    free_start->size = 0;
     free_block *first = free_start + HEAP_MIN_FREE_BLOCK_SIZE;
     *first = free_block();
     first->size = Allocator::heap_size - HEAP_MIN_FREE_BLOCK_SIZE;
