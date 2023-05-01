@@ -88,8 +88,22 @@ inline unsigned int PCSPK::readCounter() {
  * Parameter:       time (delay in ms)                                       *
  *****************************************************************************/
 inline void PCSPK::delay (int time) {
-
-    /* Hier muess Code eingefuegt werden */
+    int pit_freq = 1193180;
+    double ms_per_decr = 1000.0 * (1.0/pit_freq);
+    unsigned int necessary_decrements = ms_per_decr * time;
+    unsigned int last_read = readCounter();
+    unsigned int done_decrements = 0;
+    while(done_decrements < necessary_decrements) {
+        unsigned int current_read = readCounter();
+        if(last_read >= current_read) {
+            done_decrements += last_read - current_read;
+            last_read = current_read;
+        } else {
+            done_decrements += last_read;
+            done_decrements += UINT16_MAX - current_read;
+            last_read = current_read;
+        }
+    }
 
 }
 
