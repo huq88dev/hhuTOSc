@@ -25,23 +25,31 @@ void waitForReturn() {
 void heap_demo() {
     allocator.dump_free_memory();
     kout << "Allocating 150 Byte..." << endl;
-    uint64_t *mem = reinterpret_cast<uint64_t *>(allocator.alloc(150));
-    kout << "Allocated " << *(mem - 1) << " Byte at " << mem << endl;
+    uint64_t *mem_1 = reinterpret_cast<uint64_t *>(allocator.alloc(150));
+    kout << "Allocated " << *(mem_1 - 1) << " Byte at " << mem_1 << endl;
     allocator.dump_free_memory();
     kout << "Allocating 50 Byte..." << endl;
-    mem = reinterpret_cast<uint64_t *>(allocator.alloc(50));
-    kout << "Allocated " << *(mem - 1) <<  " Byte at " << mem << endl;
+    uint64_t *mem_2 = reinterpret_cast<uint64_t *>(allocator.alloc(50));
+    kout << "Allocated " << *(mem_2 - 1) <<  " Byte at " << mem_2 << endl;
     allocator.dump_free_memory();
-    kout << "Allocating 2096860 Byte..." << endl;
-    mem = reinterpret_cast<uint64_t *>(allocator.alloc(2096860));
-    if(mem == nullptr) {
-        kout << "Couldn't allocate 2096860 Byte. Not enough space for metadata." << endl;
-    }
+    kout << "Freeing " << mem_1 << endl;
+    allocator.free(mem_1);
     allocator.dump_free_memory();
-    /*
-    allocator.alloc(1500000);
-    allocator.alloc(597152);
+    kout << "Allocating 140 Byte..." << endl;
+    mem_1 = reinterpret_cast<uint64_t *>(allocator.alloc(140));
+    kout << "Allocated " << *(mem_1 - 1) << " Byte at " << mem_1 << endl;
     allocator.dump_free_memory();
-    allocator.alloc(597152);
-    */
+    kout << "Allocating 1000 Byte..." << endl;
+    uint64_t *mem_3 = reinterpret_cast<uint64_t *>(allocator.alloc(1000));
+    kout << "Allocated " << *(mem_3 - 1) <<  " Byte at " << mem_3 << endl;
+    allocator.dump_free_memory();
+    kout << "Freeing " << mem_3 << endl;
+    allocator.free(mem_3);
+    allocator.dump_free_memory();
+    kout << "Freeing " << mem_1 << endl;
+    allocator.free(mem_1);
+    allocator.dump_free_memory();
+    kout << "Freeing " << mem_2 << endl;
+    allocator.free(mem_2);
+    allocator.dump_free_memory();
 }
