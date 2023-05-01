@@ -79,10 +79,19 @@ void CGA::show (int x, int y, char character, unsigned char attrib) {
 void CGA::print (char* string, int n, unsigned char attrib) {
     int x, y;
     getpos(x, y);
+    while(y >= ROWS) {
+        scrollup();
+        getpos(x, y);
+    }
     for (int i = 0; i < n; ++i) {
         if(x == COLUMNS || *(string + i) == '\n') {
             x = 0;
             y++;
+            setpos(x, y);
+            if (y == ROWS) {
+                scrollup();
+                y--;
+            }
         } else {
             show(x, y, *(string + i), attrib);
             x++;
