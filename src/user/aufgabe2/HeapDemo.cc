@@ -24,15 +24,18 @@ void waitForReturn() {
 
 void heap_demo() {
     allocator.dump_free_memory();
-    void *mem = allocator.alloc(150);
-    kout << "Allocated 150 Byte at " << mem << endl;
+    kout << "Allocating 150 Byte..." << endl;
+    uint64_t *mem = reinterpret_cast<uint64_t *>(allocator.alloc(150));
+    kout << "Allocated " << *(mem - 1) << " Byte at " << mem << endl;
     allocator.dump_free_memory();
-    mem = allocator.alloc(50);
-    kout << "Allocated 50 Byte at " << mem << endl;
+    kout << "Allocating 50 Byte..." << endl;
+    mem = reinterpret_cast<uint64_t *>(allocator.alloc(50));
+    kout << "Allocated " << *(mem - 1) <<  " Byte at " << mem << endl;
     allocator.dump_free_memory();
-    mem = allocator.alloc(2096870);
+    kout << "Allocating 2096860 Byte..." << endl;
+    mem = reinterpret_cast<uint64_t *>(allocator.alloc(2096860));
     if(mem == nullptr) {
-        kout << "Couldn't allocate 2096870 Byte. Not enough space for metadata." << endl;
+        kout << "Couldn't allocate 2096860 Byte. Not enough space for metadata." << endl;
     }
     allocator.dump_free_memory();
     /*
