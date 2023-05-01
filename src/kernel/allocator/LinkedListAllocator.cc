@@ -108,8 +108,12 @@ void * LinkedListAllocator::alloc(uint64_t req_size) {
  * Beschreibung:    Einen Speicherblock freigeben.                           *
  *****************************************************************************/
 void LinkedListAllocator::free(void *ptr) {
-
-     /* Hier muess Code eingefuegt werden */
-
+    uint64_t *freeing_size = reinterpret_cast<uint64_t *>(ptr) - 1;
+    uint64_t size = *freeing_size;
+    free_block *new_block = reinterpret_cast<free_block *>(freeing_size);
+    *new_block = free_block();
+    new_block->size = size;
+    new_block->next = free_start->next;
+    free_start->next = new_block;
 }
 
