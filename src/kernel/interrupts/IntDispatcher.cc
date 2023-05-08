@@ -34,7 +34,7 @@ void int_disp (unsigned int vector) {
 
     /* hier muss Code eingefuegt werden */
     
-    kout << "Ein Interrupt ist aufgetreten" << slot << endl;
+    //kout << "Ein Interrupt ist aufgetreten" << slot << endl;
 
 }
 

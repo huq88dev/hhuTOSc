@@ -14,12 +14,12 @@
 //#include "user/aufgabe2/MyObj.h"
 
 
-// Hilfsfunktion: Auf Return-Taste warten
+/*// Hilfsfunktion: Auf Return-Taste warten
 void waitForReturn() {
 
-    /* hier muss Code eingefuegt werden */
+    *//* hier muss Code eingefuegt werden *//*
 
-}
+}*/
 
 
 void heap_demo() {

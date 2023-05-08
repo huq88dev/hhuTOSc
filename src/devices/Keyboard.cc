@@ -269,7 +269,7 @@ Keyboard::Keyboard () :
  *                  ungueltigen Wert zurueck, was mit Key::valid ()          *
  *                  ueberprueft werden kann.                                 *
  *****************************************************************************/
-Key Keyboard::key_hit () {
+/*Key Keyboard::key_hit () {
     Key invalid;  // nicht explizit initialisierte Tasten sind ungueltig
 
     bool outb_set = false;
@@ -288,7 +288,7 @@ Key Keyboard::key_hit () {
         return gather;
     }
     return invalid;
-}
+}*/
 
 
 /*****************************************************************************
@@ -324,7 +324,7 @@ void Keyboard::reboot () {
  *                  sollen. Erlaubt sind Werte zwischen 0 (sehr schnell)     *
  *                  und 31 (sehr langsam).                                   *
  *****************************************************************************/
-void Keyboard::set_repeat_rate (int speed, int delay) {
+void Keyboard::set_repeat_rate (uint32_t speed, uint32_t delay) {
 
     unsigned char ctrl = ctrl_port.inb();
     if(ctrl || speed < 0 || speed > 31 || delay < 0 || delay > 3) {

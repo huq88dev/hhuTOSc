@@ -12,7 +12,7 @@
 
 
 void keyboard_demo() {
-    int x, y;
+    /*int x, y;
     while(1) {
         kout.getpos(x, y);
         while(y >= kout.ROWS || x >= kout.COLUMNS) {
@@ -24,6 +24,6 @@ void keyboard_demo() {
             kout << input.ascii();
             kout.flush();
         }
-    }
+    }*/
 
 }

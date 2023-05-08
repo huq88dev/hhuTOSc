@@ -53,7 +53,7 @@ int main() {
     allocator.init();
 
     // IDT & PIC initialisieren
-    init_interrupts();     // in 'interrupts.asm'
+    // init_interrupts();     // in 'interrupts.asm'
 
     // Tastatur-Unterbrechungsroutine 'einstoepseln'
 
@@ -67,9 +67,9 @@ int main() {
 
     //aufgabe01();
 
-    //aufgabe02();
+    aufgabe02();
 
-    aufgabe03();
+    //aufgabe03();
 
     while (1) ; // wir kehren nicht zum Bootlader zurueck
     return 0;
