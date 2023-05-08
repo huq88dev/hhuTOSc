@@ -367,9 +367,10 @@ void Keyboard::set_led (char led, bool on) {
  *****************************************************************************/
 void Keyboard::plugin () {
     pic.allow(pic.keyboard);
+    intdis.assign(intdis.keyboard, kb);
 }
 
 // Unterbrechnungsroutine der Tastatur.
 void Keyboard::trigger () {
-
+    kout << "Keyboard::trigger wurde aufgerufen." << endl;
 }
