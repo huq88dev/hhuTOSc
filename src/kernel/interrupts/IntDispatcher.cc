@@ -31,11 +31,8 @@ extern "C" void int_disp (unsigned int vector);
  *      vector:     Vektor-Nummer der Unterbrechung                          *
  *****************************************************************************/
 void int_disp (unsigned int vector) {
-
-    /* hier muss Code eingefuegt werden */
-    
-    //kout << "Ein Interrupt ist aufgetreten" << slot << endl;
-
+    intdis.report(vector);
+    kout << "int_disp: Es gab einen Interrupt mit der Vektor-Nummer = " << vector << endl;
 }
 
 
@@ -62,9 +59,11 @@ IntDispatcher::IntDispatcher () {
  * Rueckgabewert:   0 = Erfolg, -1 = Fehler                                  *
  *****************************************************************************/
 int IntDispatcher::assign (unsigned int vector, ISR& isr) {
-
-    /* hier muss Code eingefuegt werden */
-
+    if(vector >= size) {
+        return -1;
+    }
+    map[vector] = &isr;
+    return 0;
 }
 
 
@@ -79,7 +78,9 @@ int IntDispatcher::assign (unsigned int vector, ISR& isr) {
  * Rueckgabewert:   0 = ISR wurde aufgerufen, -1 = unbekannte Vektor-Nummer  *
  *****************************************************************************/
 int IntDispatcher::report (unsigned int vector) {
-
-    /* hier muss Code eingefuegt werden */
-
+    if(vector >= size || map[vector] == nullptr) {
+        return -1;
+    }
+    map[vector]->trigger();
+    return 0;
 }
