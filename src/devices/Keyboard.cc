@@ -9,6 +9,7 @@
  *****************************************************************************/
 
 #include "devices/Keyboard.h"
+#include "kernel/Globals.h"
 
 /* Tabellen fuer ASCII-Codes (Klassenvariablen) intiialisieren */
 
@@ -358,10 +359,14 @@ void Keyboard::set_led (char led, bool on) {
 
 }
 
-
-// Aktivierung der Unterbrechungen fuer die Tastatur
+/*****************************************************************************
+ * Methode:         Keyboard::plugin                                         *
+ *---------------------------------------------------------------------------*
+ * Beschreibung:    Aktiviert die Unterbrechungen fuer die Tastatur via      *
+ *                  pic.allow                                                *
+ *****************************************************************************/
 void Keyboard::plugin () {
-
+    pic.allow(pic.keyboard);
 }
 
 // Unterbrechnungsroutine der Tastatur.
