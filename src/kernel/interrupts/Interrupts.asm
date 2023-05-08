@@ -10,7 +10,7 @@
 ;* Autor:           Michael Schoettner, 6.7.2022                              *
 ;******************************************************************************
 
-[GLOBAL _init_interrupts]      ; Funktion exportieren
+[GLOBAL init_interrupts]      ; Funktion exportieren
 
 [EXTERN int_disp]             ; Funktion in C, welche Interrupts behandelt
 
@@ -19,7 +19,7 @@
 
 
 ; Exportiere Funktion
-_init_interrupts:
+init_interrupts:
    call setup_idt
    call reprogram_pics
    ret

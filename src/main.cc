@@ -53,7 +53,7 @@ int main() {
     allocator.init();
 
     // IDT & PIC initialisieren
-    // init_interrupts();     // in 'interrupts.asm'
+    init_interrupts();     // in 'interrupts.asm'
 
     // Tastatur-Unterbrechungsroutine 'einstoepseln'
 
