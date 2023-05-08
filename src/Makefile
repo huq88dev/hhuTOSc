@@ -143,6 +143,7 @@ qemu-gdb: $(OBJDIR)/system.iso
 # --------------------------------------------------------------------------
 # 'gdb' startet den GDB-Debugger und verbindet sich mit dem GDB-Stub des vorher
 # gestarteten Qemu.
+# tui enable für graphische Oberfläche
 
 gdb:
 	gdb -x /tmp/gdbcommands.$(shell id -u) $(OBJDIR)/system
