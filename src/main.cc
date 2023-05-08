@@ -16,11 +16,13 @@
 #include "user/aufgabe2/HeapDemo.h"
 #include "user/aufgabe2/SoundDemo.h"
 
+extern "C" void init_interrupts();
 
-void aufgabe01() { 
+
+void aufgabe01() {
    // Bildschirmausgabe testen
    text_demo();
-    
+
    // Tastatur testen
    keyboard_demo();
 }
@@ -35,20 +37,40 @@ void aufgabe02() {
 }
 
 
+void aufgabe03() {
+    // Keyboard & Interrupts testen
+    keyboard_demo();
+}
+
+
+/*****************************************************************************
+ * Funktion:        main                                                     *
+ *---------------------------------------------------------------------------*
+ * Beschreibung:    C-Einstiegsfunktion fuer hhuTOS.                         *
+ *****************************************************************************/
 int main() {
-    //Initialisiere Heap
+    // Heapverwaltung initialisieren
     allocator.init();
+
+    // IDT & PIC initialisieren
+    init_interrupts();     // in 'interrupts.asm'
+
+    // Tastatur-Unterbrechungsroutine 'einstoepseln'
+
+    // Interrupt-Verarbeitung durch CPU erlauben
 
     // Bildschirm loeschen.
     kout.clear();
-    
+
     // Startmeldung ausgeben
     kout << "Starting..." << endl;
 
     //aufgabe01();
 
-    aufgabe02();
+    //aufgabe02();
 
-    while (1);
+    aufgabe03();
+
+    while (1) ; // wir kehren nicht zum Bootlader zurueck
     return 0;
  }
