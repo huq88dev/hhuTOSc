@@ -66,10 +66,10 @@ private:
     
    // Tastaturabfrage (vorerst Polling)
    Key key_hit ();
-    
+
 public:
    unsigned int lastkey; // speichert den ASCII-Code der zuletzt gedrückten Taste
-   
+
    // Initialisierung der Tastatur.
    Keyboard ();
 
@@ -84,7 +84,7 @@ public:
 
    // Aktivierung der Unterbrechungen fuer die Tastatur
    void plugin ();
-    
+
    // Unterbrechnungsroutine der Tastatur.
    void trigger ();
 };
