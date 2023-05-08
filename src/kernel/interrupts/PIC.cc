@@ -35,9 +35,11 @@ static IOport IMR2 (0xa1);    // interrupt mask register von PIC 2
  *      irq:        IRQ der erlaubt werden soll                              *
  *****************************************************************************/
 void PIC::allow (int irq) {
-
-    /* hier muss Code eingefuegt werden */
-    
+    if(irq >= 0 && irq < 8) {
+        IMR1.outb(IMR1.inb() & ~(1 << irq));
+    } else if(irq < 16) {
+        IMR2.outb(IMR2.inb() & ~(1 << (irq - 8)));
+    }
 }
 
 
@@ -50,9 +52,11 @@ void PIC::allow (int irq) {
  *      interrupt:  IRQ der maskiert werden soll                             *
  *****************************************************************************/
 void PIC::forbid (int irq) {
-
-    /* hier muss Code eingefuegt werden */
-
+    if(irq >= 0 && irq < 8) {
+        IMR1.outb(IMR1.inb() | (1 << irq));
+    } else if(irq < 16) {
+        IMR2.outb(IMR2.inb() | (1 << (irq - 8)));
+    }
 }
 
 
@@ -66,8 +70,12 @@ void PIC::forbid (int irq) {
  *      irq:  IRQ dessen Status erfragt werden soll                          *
  *****************************************************************************/
 bool PIC::status (int irq) {
-
-    /* hier muss Code eingefuegt werden */
-
+    bool result = false;
+    if(irq >= 0 && irq < 8) {
+        result = IMR1.inb() & (1 << irq);
+    } else if(irq < 16) {
+        result = IMR2.inb() & (1 << (irq - 8));
+    }
+    return result;
 }
  
