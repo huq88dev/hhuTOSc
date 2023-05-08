@@ -52,6 +52,7 @@ unsigned char Keyboard::scan_num_tab[] =
 };
 
 
+
 /*****************************************************************************
  * Methode:         Keyboard::key_decoded                                    *
  *---------------------------------------------------------------------------*
@@ -354,5 +355,16 @@ void Keyboard::set_repeat_rate (uint32_t speed, uint32_t delay) {
 void Keyboard::set_led (char led, bool on) {
 
     /* Hier muss Code eingefuegt werden. */
+
+}
+
+
+// Aktivierung der Unterbrechungen fuer die Tastatur
+void Keyboard::plugin () {
+
+}
+
+// Unterbrechnungsroutine der Tastatur.
+void Keyboard::trigger () {
 
 }
