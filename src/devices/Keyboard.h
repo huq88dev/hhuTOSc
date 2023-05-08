@@ -65,6 +65,9 @@ private:
 
     // Ermittelt anhand von Tabellen den ASCII-Code.
     void get_ascii_code ();
+
+    // Tastaturabfrage (vorerst Polling)
+    Key key_hit ();
     
 public:
    // speichert den ASCII-Code der zuletzt gedrückten Taste
@@ -73,10 +76,6 @@ public:
    
    // Initialisierung der Tastatur.
    Keyboard ();
-
-   // Tastaturabfrage (vorerst Polling)
-   // Sollte nicht mehr verwendet werden, daher auskommentieren
-   // Key key_hit ();
 
    // Fuehrt einen Neustart des Rechners durch.
    void reboot ();

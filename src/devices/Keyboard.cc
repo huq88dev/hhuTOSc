@@ -271,7 +271,7 @@ Keyboard::Keyboard () :
  *                  ungueltigen Wert zurueck, was mit Key::valid ()          *
  *                  ueberprueft werden kann.                                 *
  *****************************************************************************/
-/*Key Keyboard::key_hit () {
+Key Keyboard::key_hit () {
     Key invalid;  // nicht explizit initialisierte Tasten sind ungueltig
 
     bool outb_set = false;
@@ -290,7 +290,7 @@ Keyboard::Keyboard () :
         return gather;
     }
     return invalid;
-}*/
+}
 
 
 /*****************************************************************************
@@ -370,7 +370,18 @@ void Keyboard::plugin () {
     intdis.assign(intdis.keyboard, kb);
 }
 
-// Unterbrechnungsroutine der Tastatur.
+/*****************************************************************************
+ * Methode:         Keyboard::trigger                                        *
+ *---------------------------------------------------------------------------*
+ * Beschreibung:    Prüfen, welche Taste zuletzt gedrückt wurde.             *
+ *                  und den ASCII Code dieses Zeichens in lastKey            *
+ *                  speichern, falls es eine valide Eingabe war.             *
+ *****************************************************************************/
 void Keyboard::trigger () {
     kout << "Keyboard::trigger wurde aufgerufen." << endl;
+    Key pressedKey = kb.key_hit();
+    if(pressedKey != NULL) {
+        lastkey = pressedKey.ascii();
+    }
+    kout << lastkey << endl;
 }
