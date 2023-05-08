@@ -56,8 +56,10 @@ int main() {
     init_interrupts();     // in 'interrupts.asm'
 
     // Tastatur-Unterbrechungsroutine 'einstoepseln'
+    kb.plugin();
 
     // Interrupt-Verarbeitung durch CPU erlauben
+    cpu.enable_int();
 
     // Bildschirm loeschen.
     kout.clear();
