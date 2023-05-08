@@ -63,11 +63,15 @@ int main() {
     kout.clear();
 
     // Startmeldung ausgeben
-    kout << "Starting..." << endl;
+    kout << "Awesome OS!\n==========================\n\nUnterstuetze Funktionen:" << endl;
+    kout << "   - Bildschirmausgaben" << endl;
+    kout << "   - Sound ueber den PC-Lautsprecher" << endl;
+    kout << "   - Einfache Heap-Verwaltung" << endl;
+    kout << "   - Tastatureingaben" << endl;
 
     //aufgabe01();
 
-    aufgabe02();
+    //aufgabe02();
 
     //aufgabe03();
 
