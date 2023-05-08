@@ -31,8 +31,11 @@ extern "C" void int_disp (unsigned int vector);
  *      vector:     Vektor-Nummer der Unterbrechung                          *
  *****************************************************************************/
 void int_disp (unsigned int vector) {
-    intdis.report(vector);
     kout << "int_disp: Es gab einen Interrupt mit der Vektor-Nummer = " << vector << endl;
+    int result = intdis.report(vector);
+    if(result == -1) {
+        kout << "Ein Interrupt mit Vektor-Nummer = " << vector << " konnte nicht erfolgreich behandelt werden." << endl;
+    }
 }
 
 
