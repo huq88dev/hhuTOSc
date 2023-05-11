@@ -87,11 +87,11 @@ void CGA::print (char* string, int n, unsigned char attrib) {
         if(x == COLUMNS || *(string + i) == '\n') {
             x = 0;
             y++;
-            setpos(x, y);
-            if (y == ROWS) {
+            while (y >= ROWS) {
                 scrollup();
                 y--;
             }
+            setpos(x, y);
         } else {
             show(x, y, *(string + i), attrib);
             x++;
