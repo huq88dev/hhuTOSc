@@ -381,7 +381,7 @@ void Keyboard::trigger () {
     Key pressedKey = key_hit();
     if(pressedKey != NULL) {
         lastkey = pressedKey.ascii();
+        kout << (unsigned char) lastkey;
+        kout.flush();
     }
-    kout << pressedKey.ascii(); //(unsigned char) lastkey;
-    kout.flush();
 }
