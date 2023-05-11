@@ -9,8 +9,8 @@
  *****************************************************************************/
 
 #include "kernel/Globals.h"
-#include "user/CoroutineDemo.h"
-#include "user/CoroutineLoop.h"
+#include "user/aufgabe4/CoroutineDemo.h"
+#include "user/aufgabe4/CoroutineLoop.h"
 
 
 // Stacks (koennen alternative auch per 'new' alloziert werden)

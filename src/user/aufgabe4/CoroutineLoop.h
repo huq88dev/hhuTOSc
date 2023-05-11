@@ -25,7 +25,7 @@ private:
     
 public:
     // Gibt der Loop einen Stack und eine Id.
-    CoroutineLoop (unsigned int* stack, int i) : Coroutine (stack) { id = i; }
+    CoroutineLoop (uint64_t* stack, int i) : Coroutine (stack) { id = i; }
 
     // Zaehlt einen Zaehler hoch und gibt ihn auf dem Bildschirm aus.
     void run ();
