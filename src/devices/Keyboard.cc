@@ -275,11 +275,11 @@ Key Keyboard::key_hit () {
     Key invalid;  // nicht explizit initialisierte Tasten sind ungueltig
 
     bool outb_set = false;
-    unsigned char status;
-    do {
-        status = ctrl_port.inb();
-        outb_set = status & outb;
-    } while(!outb_set);
+    unsigned char status = ctrl_port.inb();
+    outb_set = status & outb;
+    if(!outb_set) {
+        return invalid;
+    }
     code = data_port.inb();
     bool auxb_set = status & auxb;
     if(auxb_set) {
@@ -382,6 +382,6 @@ void Keyboard::trigger () {
     if(pressedKey != NULL) {
         lastkey = pressedKey.ascii();
     }
-    kout << (unsigned char) lastkey;
+    kout << pressedKey.ascii(); //(unsigned char) lastkey;
     kout.flush();
 }
