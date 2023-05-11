@@ -77,7 +77,7 @@ int main() {
 
     //aufgabe02();
 
-    aufgabe03();
+    //aufgabe03();
 
     while (1) ; // wir kehren nicht zum Bootlader zurueck
     return 0;
