@@ -13,6 +13,10 @@
 
 void key_irq_demo() {
 
-   /* Hier muss Code eingefuegt werden */
-
+   while(true) {
+       for (int i = 0; i < 10; i++) {
+           kout.setpos(0, i + 5);
+           kout << i << endl;
+       }
+   }
 }

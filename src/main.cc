@@ -15,6 +15,7 @@
 #include "user/aufgabe1/KeyboardDemo.h"
 #include "user/aufgabe2/HeapDemo.h"
 #include "user/aufgabe2/SoundDemo.h"
+#include "user/aufgabe3/KeyIRQDemo.h"
 
 extern "C" void _init_interrupts();
 
@@ -39,7 +40,7 @@ void aufgabe02() {
 
 void aufgabe03() {
     // Keyboard & Interrupts testen
-    keyboard_demo();
+    key_irq_demo();
 }
 
 
@@ -70,12 +71,13 @@ int main() {
     kout << "   - Sound ueber den PC-Lautsprecher" << endl;
     kout << "   - Einfache Heap-Verwaltung" << endl;
     kout << "   - Tastatureingaben" << endl;
+    kout << "   - Interrupts" << endl;
 
     //aufgabe01();
 
     //aufgabe02();
 
-    //aufgabe03();
+    aufgabe03();
 
     while (1) ; // wir kehren nicht zum Bootlader zurueck
     return 0;
