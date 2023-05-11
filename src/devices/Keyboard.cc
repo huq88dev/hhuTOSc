@@ -378,10 +378,10 @@ void Keyboard::plugin () {
  *                  speichern, falls es eine valide Eingabe war.             *
  *****************************************************************************/
 void Keyboard::trigger () {
-    kout << "Keyboard::trigger wurde aufgerufen." << endl;
-    Key pressedKey = kb.key_hit();
+    Key pressedKey = key_hit();
     if(pressedKey != NULL) {
         lastkey = pressedKey.ascii();
     }
-    kout << lastkey << endl;
+    kout << (unsigned char) lastkey;
+    kout.flush();
 }
