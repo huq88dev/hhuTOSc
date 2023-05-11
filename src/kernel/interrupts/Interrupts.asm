@@ -5,12 +5,12 @@
 ;*----------------------------------------------------------------------------*
 ;* Beschreibung:    Hier befindet sich alles rund um die low-level Behandlung *
 ;*                  von Interrupts: IDT, PIC-Initialisierung und Interrupt-   *
-;*                  Handler und Aufruf der Interrupt-Behandlung in C.         * 
+;*                  Handler und Aufruf der Interrupt-Behandlung in C.         *
 ;*                                                                            *
 ;* Autor:           Michael Schoettner, 6.7.2022                              *
 ;******************************************************************************
 
-[GLOBAL init_interrupts]      ; Funktion exportieren
+[GLOBAL _init_interrupts]      ; Funktion exportieren
 
 [EXTERN int_disp]             ; Funktion in C, welche Interrupts behandelt
 
@@ -19,7 +19,7 @@
 
 
 ; Exportiere Funktion
-init_interrupts:
+_init_interrupts:
    call setup_idt
    call reprogram_pics
    ret
@@ -173,7 +173,7 @@ idt:
 %macro idt_entry 1
 	dw  (wrapper_%1 - wrapper_0) & 0xffff ; Offset 0 .. 15
 	dw  0x0000 | 0x8 * 2 ; Selector zeigt auf den 64-Bit-Codesegment-Deskriptor der GDT
-	dw  0x8e00 ; 8 -> interrupt is present, e -> 80386 64-bit interrupt gate
+	dw  0x8e00 ; 8 -> interrupt is present, e -> 80386 32-bit interrupt gate
 	dw  ((wrapper_%1 - wrapper_0) & 0xffff0000) >> 16 ; Offset 16 .. 31
 	dd  ((wrapper_%1 - wrapper_0) & 0xffffffff00000000) >> 32 ; Offset 32..63
 	dd  0x00000000 ; Reserviert
@@ -190,4 +190,3 @@ idt_entry i
 idt_descr:
 	dw  256*8 - 1    ; 256 Einträge
 	dq idt
-

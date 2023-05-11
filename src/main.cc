@@ -16,7 +16,7 @@
 #include "user/aufgabe2/HeapDemo.h"
 #include "user/aufgabe2/SoundDemo.h"
 
-extern "C" void init_interrupts();
+extern "C" void _init_interrupts();
 
 
 void aufgabe01() {
@@ -53,7 +53,7 @@ int main() {
     allocator.init();
 
     // IDT & PIC initialisieren
-    init_interrupts();     // in 'interrupts.asm'
+    _init_interrupts();     // in 'interrupts.asm'
 
     // Tastatur-Unterbrechungsroutine 'einstoepseln'
     kb.plugin();
