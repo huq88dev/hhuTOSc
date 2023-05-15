@@ -5,7 +5,7 @@
  *---------------------------------------------------------------------------*
  * Beschreibung:    Einstieg in eine Anwendung.                              *
  *                                                                           *
- * Autor:           Michael Schoettner, HHU, 15.8.2016                       *
+ * Autor:           Michael Schoettner, HHU, 11.5.2023                       *
  *****************************************************************************/
 
 #include "kernel/Globals.h"
